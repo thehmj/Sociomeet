@@ -32,7 +32,7 @@ const Post = () => {
             const { postdetails, user } = await response.json();
             SetThispost(postdetails);
             setMydata(user);
-
+         //eslint-disable-next-line react-hooks/exhaustive-deps
 
         }
         getthispost();
