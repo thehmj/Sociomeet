@@ -4,7 +4,7 @@ import '../Styles/Settings.css'
 
 const Setting = () => {
 
-
+    const forward = "https://sociomeetbackend.onrender.com";
     const [bio, setBio] = useState('');
     const [Name, setName] = useState();
     const [password, setPassword] = useState();
@@ -13,7 +13,7 @@ const Setting = () => {
         if (!Name) {
             return alert('empty')
         }
-        const response = await fetch('http://localhost:5000/api/updatename', {
+        const response = await fetch(`${forward}/api/updatename`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +36,7 @@ const Setting = () => {
         if (!password) {
             return alert('empty')
         }
-        const response = await fetch('http://localhost:5000/api/updatepassword', {
+        const response = await fetch(`${forward}/api/updatepassword`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -60,7 +60,7 @@ const Setting = () => {
         if (!bio) {
             return alert('empty')
         }
-        const response = await fetch('http://localhost:5000/api/updatebio', {
+        const response = await fetch(`${forward}/api/updatebio`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

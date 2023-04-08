@@ -1,12 +1,12 @@
 // import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function Signin({data,setData}) {
-const forward = process.env.FORWARD;
+const forward = "https://sociomeetbackend.onrender.com";
 
 const navigate = useNavigate();
  const handleSubmit = async(e)=>{
   e.preventDefault();
-  const res = await fetch(`http://${forward}/api/login`,{
+  const res = await fetch(`${forward}/api/login`,{
     method : "POST",
     headers:{
       'Content-Type' : "application/json"

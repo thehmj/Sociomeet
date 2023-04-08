@@ -11,6 +11,7 @@ import dustbin from '../images/delete.png';
 
 
 const Post = () => {
+      const forward = "https://sociomeetbackend.onrender.com";
     const [thispost, SetThispost] = useState();
     const { post_id } = useParams();
     const [mycomment, SetMycomment] = useState();
@@ -21,7 +22,7 @@ const Post = () => {
     useEffect(() => {
 
         const getthispost = async () => {
-            const response = await fetch(`http://localhost:5000/api/post/?post_id=${post_id}`, {
+            const response = await fetch(`${forward}/api/post/?post_id=${post_id}`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -43,7 +44,7 @@ const Post = () => {
 
         e.preventDefault();
 
-        const response = await fetch('http://localhost:5000/api/postcomment', {
+        const response = await fetch(`${forward}/api/postcomment`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ const Post = () => {
 
 
     const handlelike = async (_id) => {
-        const response = await fetch('http://localhost:5000/api/like', {
+        const response = await fetch(`${forward}/api/like`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ const Post = () => {
 
     }
     const handleunlike = async (_id) => {
-        const response = await fetch('http://localhost:5000/api/unlike', {
+        const response = await fetch(`${forward}/api/unlike`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -93,7 +94,7 @@ const Post = () => {
 
     }
     const deleteposts = async (postid) => {
-        const response = await fetch('http://localhost:5000/api/deletepost', {
+        const response = await fetch(`${forward}/api/deletepost`, {
             method: "Delete",
             headers: {
                 'Content-Type': 'application/json',
@@ -111,7 +112,7 @@ const Post = () => {
     }
 
     const Savethispost = async (_id) => {
-        const response = await fetch('http://localhost:5000/api/savethispost', {
+        const response = await fetch(`${forward}/api/savethispost`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -125,7 +126,7 @@ const Post = () => {
     }
 
     const Unsavethispost = async (_id) => {
-        const response = await fetch('http://localhost:5000/api/unsavethispost', {
+        const response = await fetch(`${forward}/api/unsavethispost`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

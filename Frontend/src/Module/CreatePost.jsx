@@ -3,6 +3,7 @@ import '../Styles/Createpost.css'
 import Nav from "../Components/Navigation";
 import { useNavigate } from 'react-router-dom'
 const CreatePost = () => {
+    const forward = "https://sociomeetbackend.onrender.com";
     const [data, setData] = useState({
         caption: '',
         img: '',
@@ -44,7 +45,7 @@ const CreatePost = () => {
 
         const { secure_url } = await uploadImage();
 
-        const response = await fetch('http://localhost:5000/api/createpost', {
+        const response = await fetch(`${forward}/api/createpost`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

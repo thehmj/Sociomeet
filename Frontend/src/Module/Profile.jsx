@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import cross from '../images/close.png'
 
 const Profile = () => {
+   const forward = "https://sociomeetbackend.onrender.com";
   const navigate = useNavigate();
   const [userinfo, SetUserinfo] = useState({});
   const [posts, setPosts] = useState([]);
@@ -19,7 +20,7 @@ const Profile = () => {
   
   useEffect(() => {
     const getposts = async () => {
-      const response = await fetch('http://localhost:5000/api/profile', {
+      const response = await fetch(`${forward}/api/profile`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',

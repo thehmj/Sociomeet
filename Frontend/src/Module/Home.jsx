@@ -10,6 +10,8 @@ import unsave from '../images/save.png'
 import cross from '../images/close.png'
 
 function Home() {
+
+    const forward = "https://sociomeetbackend.onrender.com";
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
     const [mydata, setMydata] = useState([]);
@@ -19,7 +21,7 @@ function Home() {
 
     useEffect(() => {
         const homeposts = async () => {
-            const response = await fetch('http://localhost:5000/api/homeposts', {
+            const response = await fetch(`${forward}/api/homeposts`, {
                 method: "GET",
                 headers: {
                     'Content-Type': 'application/json',
@@ -35,7 +37,7 @@ function Home() {
     }, [])
 
     const handlelike = async (_id, index) => {
-        const response = await fetch('http://localhost:5000/api/like', {
+        const response = await fetch(`${forward}/api/like`, {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +56,7 @@ function Home() {
 
     }
     const Savethispost = async (_id) => {
-        const response = await fetch('http://localhost:5000/api/savethispost', {
+        const response = await fetch(`${forward}/api/savethispost`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +70,7 @@ function Home() {
     }
 
     const Unsavethispost = async (_id) => {
-        const response = await fetch('http://localhost:5000/api/unsavethispost', {
+        const response = await fetch(`${forward}/api/unsavethispost`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -82,7 +84,7 @@ function Home() {
     }
 
     const handleunlike = async (_id, index) => {
-        const response = await fetch('http://localhost:5000/api/unlike', {
+        const response = await fetch(`${forward}/api/unlike`, {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
@@ -104,7 +106,7 @@ function Home() {
         SetSearch(e.target.value);
         console.log(e.target.value);
         const Usearch = e.target.value;
-        const response = await fetch('http://localhost:5000/api/search', {
+        const response = await fetch(`${forward}/api/search`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

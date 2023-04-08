@@ -6,7 +6,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import cross from '../images/close.png'
 
 const Userprofile = () => {
-
+  const forward = "https://sociomeetbackend.onrender.com";
+  
   const { username } = useParams();
   const navigate = useNavigate();
   const [userinfo, SetUserinfo] = useState({});
@@ -19,7 +20,7 @@ const Userprofile = () => {
 
   useEffect(() => {
     const getposts = async () => {
-      const response = await fetch(`http://localhost:5000/api/user?username=${username}`, {
+      const response = await fetch(`${forward}/api/user?username=${username}`, {
         method: "GET",
         headers: {
           'Content-Type': 'application/json',
@@ -40,7 +41,7 @@ const Userprofile = () => {
   }, [username])
 
   const handlefollow = async () => {
-    const response = await fetch('http://localhost:5000/api/follow', {
+    const response = await fetch(`${forward}/api/follow`, {
       method: "POST",
       headers: {
         'Content-Type': 'application/json',
@@ -56,7 +57,7 @@ const Userprofile = () => {
 
 
   const handleUnfollow = async () => {
-    const response = await fetch('http://localhost:5000/api/unfollow', {
+    const response = await fetch(`${forward}/api/unfollow`, {
       method: "DELETE",
       headers: {
         'Content-Type': 'application/json',
