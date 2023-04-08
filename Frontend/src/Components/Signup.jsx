@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
-
-// import { useState } from "react";
+import BounceLoader from 'react-spinners/BounceLoader';
+import { useState } from "react";
 function Signup({ data, setData }) {
   const forward = "https://sociomeetbackend.onrender.com"
  const navigate = useNavigate();
+ const [loading, SetLoading] = useState(false);
+ 
   const handleSubmit = async (e) => {
 
     e.preventDefault();
+    SetLoading(true);
     const res = await fetch(`${forward}/api/register`, {
       method: 'POST',
       headers: {
@@ -16,6 +19,8 @@ function Signup({ data, setData }) {
         ...data
       })
     })
+    SetLoading(false);
+
     if (res.status===200) {
       console.log(res, 'res');
       alert('signup successfull')
@@ -33,6 +38,11 @@ function Signup({ data, setData }) {
 
 
   return (
+    <div>{
+      loading ?
+        <BounceLoader />
+        :
+
     <form className="signin_form" onSubmit={(e) => handleSubmit(e)}>
       <input className="input" placeholder="Enter Name" type="text" id="Name" required={true} value={data.Name} onChange={(e) => setData({ ...data, Name: e.target.value })} />
       <input className="input" placeholder="Enter username" type="text" id="username" value={data.username} onChange={(e) => setData({ ...data, username: e.target.value })} required={true} />
@@ -40,6 +50,9 @@ function Signup({ data, setData }) {
       <input className="input" placeholder="Enter password" type="password" id="password" value={data.password} onChange={(e) => setData({ ...data, password: e.target.value })} required={true} />
       <button className="button_auth" type="submit"> REGISTER</button>
 
-    </form>)  
+    </form>
+    }
+    </div>
+    )  
 }
 export default Signup;

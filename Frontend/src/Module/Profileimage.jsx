@@ -1,6 +1,6 @@
 // import { useState } from 'react'
 import { useState, useEffect } from 'react'
-
+import BounceLoader from 'react-spinners/BounceLoader';
 import '../Styles/Createpost.css'
 import Nav from "../Components/Navigation";
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,8 @@ const Profileimage = () => {
     const [data, setData] = useState();
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState();
+    const [loading, SetLoading] = useState(false);
+
     useEffect(() => {
         if (data) {
             setImageUrl(URL.createObjectURL(data));
@@ -44,7 +46,8 @@ const Profileimage = () => {
         if (data === '') {
             return alert('Please upload a picture');
         }
-        console.log(data);
+        // console.log(data);
+        SetLoading(true);
         const { secure_url } = await uploadImage();
 
         const response = await fetch(`${forward}/api/profileimageupload`, {
@@ -57,7 +60,9 @@ const Profileimage = () => {
                 url: secure_url,
             })
         })
-        console.log(response, 'postt');
+        SetLoading(false);
+
+        // console.log(response, 'postt');
         if (response.status === 200) {
             navigate('/profile')
         } else {
@@ -69,16 +74,21 @@ const Profileimage = () => {
         <>
             <Nav />
             <div className='Createpost'>
-                <div className='Createpost_box'>
-                    <div className='createpost_show_image' placeholder='Uploaded Image will display here' >
-                        <img src={imageUrl} alt="Uploaded will display here" />
+                {loading
+                    ?
+                    <BounceLoader />
+                    :
+                    <div className='Createpost_box'>
+                        <div className='createpost_show_image' placeholder='Uploaded Image will display here' >
+                            <img src={imageUrl} alt="Uploaded will display here" />
+                        </div>
+                        <form className='Createpost_form' onSubmit={(e) => handlesubmit(e)}>
+                            <input type="file" name='image' id="Createpost_image_hidden" accept="image/*" onChange={(e) => setData(e.target.files[0])} />
+                            <label for='Createpost_image_hidden' className='Createpost_image_labbel'> {data?.name || 'CLICK here to upload image'}</label>
+                            <button type="submit">Upload</button>
+                        </form>
                     </div>
-                    <form className='Createpost_form' onSubmit={(e) => handlesubmit(e)}>
-                        <input type="file" name='image' id="Createpost_image_hidden" accept="image/*" onChange={(e) => setData(e.target.files[0])} />
-                        <label for='Createpost_image_hidden' className='Createpost_image_labbel'> {data?.name || 'CLICK here to upload image'}</label>
-                        <button type="submit">Upload</button>
-                    </form>
-                </div>
+                }
             </div>
         </>
     )

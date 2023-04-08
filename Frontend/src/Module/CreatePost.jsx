@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react'
 import '../Styles/Createpost.css'
 import Nav from "../Components/Navigation";
 import { useNavigate } from 'react-router-dom'
+import BounceLoader from 'react-spinners/BounceLoader';
+
 const CreatePost = () => {
     const forward = "https://sociomeetbackend.onrender.com";
     const [data, setData] = useState({
@@ -10,6 +12,8 @@ const CreatePost = () => {
     });
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState();
+    const [loading, SetLoading] = useState(false);
+
 
     useEffect(() => {
         if (data.img) {
@@ -42,6 +46,7 @@ const CreatePost = () => {
         if (data.img === '') {
             return alert('Please upload a picture');
         }
+        SetLoading(true);
 
         const { secure_url } = await uploadImage();
 
@@ -56,6 +61,8 @@ const CreatePost = () => {
                 url: secure_url,
             })
         })
+        SetLoading(false);
+
         console.log(response, 'postt');
         if (response.status === 200) {
             navigate('/')
@@ -68,17 +75,22 @@ const CreatePost = () => {
         <>
             <Nav />
             <div className='Createpost'>
-                <div className='Createpost_box'>
-                    <div className='createpost_show_image' >
-                        <img src={imageUrl} alt="Uploaded will display here" />
-                    </div>
-                    <form className='Createpost_form' onSubmit={(e) => handlesubmit(e)}>
-                        <textarea type="text" name='caption' placeholder='Caption' id='caption' value={data.caption} onChange={(e) => setData({ ...data, caption: e.target.value })} required />
-                        <input type="file" name='image' id="Createpost_image_hidden" accept="image/*" onChange={(e) => setData({ ...data, img: e.target.files[0] })} />
-                        <label for='Createpost_image_hidden' className='Createpost_image_labbel'>{data?.img?.name || 'CLICK here to upload image'}</label>
-                        <button type="submit">Upload</button>
-                    </form>
-                </div>
+                {
+                    loading ?
+                        <BounceLoader />
+                        :
+                        <div className='Createpost_box'>
+                            <div className='createpost_show_image' >
+                                <img src={imageUrl} alt="Uploaded will display here" />
+                            </div>
+                            <form className='Createpost_form' onSubmit={(e) => handlesubmit(e)}>
+                                <textarea type="text" name='caption' placeholder='Caption' id='caption' value={data.caption} onChange={(e) => setData({ ...data, caption: e.target.value })} required />
+                                <input type="file" name='image' id="Createpost_image_hidden" accept="image/*" onChange={(e) => setData({ ...data, img: e.target.files[0] })} />
+                                <label for='Createpost_image_hidden' className='Createpost_image_labbel'>{data?.img?.name || 'CLICK here to upload image'}</label>
+                                <button type="submit">Upload</button>
+                            </form>
+                        </div>
+                }
             </div>
         </>
     )
