@@ -32,7 +32,7 @@ https://sociomeet2.netlify.app/login
 #### You need some packages at Frontend
 
 ```bash
-  npm i cors
+  npm i cors react-spinners
 ```
 #### To run this project 
 At Frontend
