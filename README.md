@@ -23,7 +23,7 @@ A Social Media Website
 - Change/Add bio
 - Change Name
 ## Deployment
-
+#### Add .env file at Backend which contains Database connection key.
 #### You need some packages at Backend
 
 ```bash
