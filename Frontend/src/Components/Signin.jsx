@@ -1,14 +1,12 @@
 // import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 function Signin({data,setData}) {
-// const [data,setData] = useState({
-//   Email : '',
-//   Password: ''
-// });
+const forward = process.env.FORWARD;
+
 const navigate = useNavigate();
  const handleSubmit = async(e)=>{
   e.preventDefault();
-  const res = await fetch('http://localhost:5000/api/login',{
+  const res = await fetch(`http://${forward}/api/login`,{
     method : "POST",
     headers:{
       'Content-Type' : "application/json"
