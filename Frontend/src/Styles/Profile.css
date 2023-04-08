@@ -1,0 +1,211 @@
+.profile{
+    display: flex;
+    justify-content: center;
+    background-color: rgb(164, 158, 150);
+}
+.profile-data{
+   min-height: 100vh;
+    width: 150vh;
+    /* border: 2px solid black; */
+    display: flex;
+    flex-direction: column;
+
+}
+.profile_image{
+    height: 200px;
+    width: 200px;
+    border: 1px solid;
+    border-radius: 50%;
+    overflow: hidden;
+    cursor: pointer; 
+
+}
+.profile_image:hover,.profile_image:focus{
+ border: none;
+ box-shadow: 1px 1px 3px 3px rgba(255, 255, 255, 0.288);
+}
+.profile_image img{
+    height: 200px;
+    width: 200px;  
+}
+.profile-data_up{
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    margin-top: 30px;
+}
+.profile-data_up_Name{
+margin: 0;
+padding: 0;
+text-transform: capitalize;
+/* border-bottom: 1px solid; */
+}
+.profile-data_up_username{
+    font-style: italic;
+/* border-bottom: 1px solid; */
+margin: 0;
+padding: 0;
+}
+.profile-data_up_bio{
+    padding-top: 5px;
+}
+.profile-data_up_stats{
+    margin:1rem ;
+  display: flex;
+  flex-wrap: wrap;  
+  column-gap: 20px;
+  font-weight: bold;
+}
+
+
+.profile_followers,.profile_following,
+.profile_savepost_btn,.profile_post_btn{
+    cursor: pointer;
+}
+
+.profile_followers_div:hover, .profile_followers_div:focus,
+.profile_following_div:hover, .profile_following_div:focus,
+.profile_post_btn:hover ,.profile_post_btn:focus,
+.profile_savepost_btn:hover ,.profile_savepost_btn:focus
+
+{
+ color: red;
+}
+
+.Show_followers{
+    position: absolute;
+    top:0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.show_followers_content{
+background-color: rgb(146, 136, 136);
+height: 50vh;
+width: 50vh;
+display: flex;
+flex-direction: column;
+overflow-y: scroll;
+font-size: 12px;
+border-radius: 2rem;
+padding: 0;
+}
+.show_followers_content_top{
+    display: grid;
+    grid-template-columns: 80% 20%;
+    text-align: center  ;
+    border-bottom: 1px solid;
+}
+
+.closeimg{
+height: 20px;
+width: 20px;
+padding: 10px 0 ;
+
+
+/* padding: 20px; */
+}
+
+.show_followers_content div{
+    /* border-bottom: 1px solid; */
+    margin: 3px;
+    padding: 2px;
+    display: flex;
+}
+
+.toshowimage{
+    height: 20px ;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid;
+    overflow: hidden;
+    
+    
+}
+.flex-col{
+    /* display: flex; */
+    flex-direction: column;
+}
+.show_followers_content img{
+   height: 20px;
+   width:  20px;
+   border-radius: 50%;
+}
+.show_followers_content div h3{
+    margin: 0;
+}
+
+.profile_follow_button{
+    background-color: rgba(57, 57, 193, 0.93);
+    font-weight: 700;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 2rem;
+    padding: 10px;
+}
+.profile_posts{
+    margin-top: 1rem;
+    border-top: 2px solid;
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: center; */
+}
+.profile_single_post{
+    border: 1px solid;
+    margin: 12px;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    overflow: hidden;
+    background-color: black;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* flex-direction: column; */
+    /* cursor: pointer; */
+}
+.profile_single_post img{
+    max-height: 300px;
+    max-width: 300px;
+    /* margin: 10px; */
+    /* box-shadow: 1px 1px 3px 3px rgba(255, 255, 255, 0.448); */
+}
+.profile_single_post_stats{
+    display: none;
+    /* color: white; */
+
+}
+/* .dustbin_post{
+    height: 25px;
+    width: 25px;
+    cursor: pointer;
+} */
+
+.profile_single_post:hover .profile_single_post_stats,
+.profile_single_post:focus .profile_single_post_stats{
+    display: flex ;
+    flex-direction: column;
+    justify-content: center !important;
+    align-items: center !important;
+    position: absolute ;
+    color: white;
+    width: 300px !important;
+    flex-wrap: wrap;
+    height: 300px !important;
+    /* opacity: 40%; */
+    
+}
+.profile_single_post:focus img,.profile_single_post:hover img{
+    opacity: 60%;
+}
+.profile_post_caption{
+    margin: 25px;
+   max-height: 90px;
+    overflow: hidden;
+}
+

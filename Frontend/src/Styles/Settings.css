@@ -1,0 +1,40 @@
+.settings{
+    display: flex;
+    justify-content: center;
+    height: 94vh;
+    align-items: center;
+    background-color: rgb(245, 241, 236);
+}
+.settingsbox{
+    height: 80vh;
+    width: 80vh;
+    border-radius: 3rem;
+    background-color:rgb(198, 202, 201)
+}
+.settingsboxtop{
+   text-align: center;
+   font-weight: 500; 
+   font-size:30px;
+   border-bottom: 4px solid white;
+   padding: 12px;
+   margin:0px 10px;
+}
+.settingsboxbottom{
+    display:flex;
+    flex-direction: column;
+}
+.settingsboxbottompart{
+   display: grid;
+   margin: 10px;
+   grid-template-columns: 20% 80%;
+}
+.nameofpart{
+  font-size: 20px;
+}
+.updatebio{
+  display: grid;
+  grid-template-columns:60% 40% ;
+}
+.updatebio button{
+    margin:0px 20px;
+}
