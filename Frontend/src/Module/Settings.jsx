@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Nav from '../Components/Navigation'
 import '../Styles/Settings.css'
+import BounceLoader from 'react-spinners/BounceLoader';
 
 const Setting = () => {
 
@@ -8,11 +9,14 @@ const Setting = () => {
     const [bio, setBio] = useState('');
     const [Name, setName] = useState();
     const [password, setPassword] = useState();
+    const [loading, SetLoading] = useState(false);
+
     const updateName = async (e) => {
         e.preventDefault();
         if (!Name) {
             return alert('empty')
         }
+        SetLoading(true);
         const response = await fetch(`${forward}/api/updatename`, {
             method: 'POST',
             headers: {
@@ -23,6 +27,7 @@ const Setting = () => {
                 Name: Name
             })
         })
+        SetLoading(false);
         if (response.status === 200) {
             setName('');
             alert('changed')
@@ -36,6 +41,7 @@ const Setting = () => {
         if (!password) {
             return alert('empty')
         }
+        SetLoading(true);
         const response = await fetch(`${forward}/api/updatepassword`, {
             method: 'POST',
             headers: {
@@ -46,6 +52,7 @@ const Setting = () => {
                 password: password
             })
         })
+        SetLoading(false);
         if (response.status === 200) {
             setPassword('');
             alert('changed');
@@ -60,6 +67,7 @@ const Setting = () => {
         if (!bio) {
             return alert('empty')
         }
+        SetLoading(true);
         const response = await fetch(`${forward}/api/updatebio`, {
             method: 'POST',
             headers: {
@@ -70,7 +78,7 @@ const Setting = () => {
                 bio: bio
             })
         })
-
+       SetLoading(false);
         if (response.status === 200) {
             setBio('');
             alert('changed')
@@ -85,8 +93,17 @@ const Setting = () => {
             <Nav />
             <div className='settings'>
                 <div className='settingsbox'>
-                    <div className='settingsboxtop'> Settings</div>
+            {loading ?
+                        <div className="Bounceloader">
+                            <BounceLoader />
+                            Loading...
+                        </div>
+                        :
+                        <div></div>
+                    }
 
+                    <div className='settingsboxtop'> Settings</div>
+    
                     <div className='settingsboxbottom'>
                         <div className='settingsboxbottompart'>
                             <div className='nameofpart'>Name :</div>

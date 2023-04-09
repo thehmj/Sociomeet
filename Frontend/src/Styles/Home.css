@@ -3,6 +3,12 @@
 }
 
 /* for All */
+.Bounceloader{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 input:focus-visible {
   box-shadow: 1px 1px 3px 3px rgb(84, 82, 82);
   outline: none;

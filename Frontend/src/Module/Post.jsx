@@ -167,12 +167,19 @@ const Post = () => {
                         <div > {thispost?.userId?.username} </div>
 
                     </div>
+                    {loading ?
+                        <div className="Bounceloader">
+                            <BounceLoader />
+                            Loading...
+                        </div>
+                        :
+                        <div></div>
+                    }
 
-                    <div className="single_post_image">
-                        {loading ? <BounceLoader /> :
+                    <div className="single_post_image">                
                             <img src={thispost?.url} alt="" />
-                        }
-                    </div>
+                        
+                  </div>
 
                     <div className="post_likes">
                         <div className="post_likes_section">

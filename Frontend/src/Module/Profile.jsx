@@ -59,15 +59,20 @@ const Profile = () => {
       <div className='profile'>
 
         <div className='profile-data'>
-
+          {loading ?
+            <div className="Bounceloader">
+              <BounceLoader />
+              Loading...
+            </div>
+            :
+            <div></div>
+          }
           <div className='profile-data_up'>
             <div className='profile_image' onClick={() => navigate('/profileimageupload')}>
-             {loading ? 
-             <BounceLoader/>
-             :
-            <img src={userinfo.Pimage} alt="..loading" />
-            } 
-             
+
+              <img src={userinfo.Pimage} alt="notfound" />
+
+
             </div>
             <h2 className='profile-data_up_Name' >{userinfo.Name}</h2>
             <div className='profile-data_up_username'>@{userinfo.username}</div>

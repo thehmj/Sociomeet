@@ -96,9 +96,14 @@ const Userprofile = () => {
       <div className='profile'>
 
         <div className='profile-data'>
-          {
-            loading ?
-            <BounceLoader/>:
+        {loading ?
+                        <div className="Bounceloader">
+                            <BounceLoader />
+                            Loading...
+                        </div>
+                        :
+                        <div></div>
+                    }
           
           <div className='profile-data_up'>
             <div className='profile_image'>
@@ -192,7 +197,7 @@ const Userprofile = () => {
               <button className='profile_follow_button' onClick={() => handleUnfollow()}>Unfollow</button>
             }
           </div>
-}
+
           <div className='profile_posts'>
             {posts?.length > 0 && posts?.map(({ _id, caption = '', url = '', like = [] }) => {
 

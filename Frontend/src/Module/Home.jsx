@@ -50,7 +50,7 @@ function Home() {
             body: JSON.stringify({ postid: _id })
 
         })
-       SetLoading(false);
+        SetLoading(false);
         const { postliked } = await response.json();
         const changedlike = posts?.map((post, i) => {
             if (i === index) return postliked
@@ -191,8 +191,19 @@ function Home() {
                                 : <div></div>
                         }
                     </div>
+                    {loading ?
+                        <div className="Bounceloader">
+                            <BounceLoader />
+                            Loading...
+                        </div>
+                        :
+                        <div></div>
+                    }
                 </div>
+
                 <div className="middle_home">
+
+
                     {
                         posts?.length > 0 &&
                         posts?.map(({ url = '', userId, _id = '', caption = '', like = [], comments = [] }, index) => {
@@ -200,61 +211,61 @@ function Home() {
                             const isLiked = like ? like.some((obj) => (obj._id === mydata._id)) : false;
 
                             return (
-                                <>
-                                 { loading ? 
-                                    <BounceLoader/>
-                                     :
+
                                 <div className='home_single_post'>
-                                    <div className="home_single_post_username" onClick={() => userId.username === mydata.username ? navigate('/profile') : navigate(`/${userId.username}`)}>
-                                        <div className="home_single_post_username_image">
-                                            <img src={userId?.Pimage} alt="" />
-                                        </div>
-                                        <div > {userId?.username}</div>
 
-                                    </div>
-
-                                    <div className="home_single_post_image">
-                                        <img onClick={() => navigate(`/post/${_id}`)} src={url} alt="" />
-                                    </div>
-
-                                    <div className="home_post_likes">
-                                        <div className="home_post_likes_section">
-                                            <span>
-                                                {isLiked
-                                                    ? <img src={likeafter} alt="" onClick={() => handleunlike(_id, index)} />
-                                                    : <img src={likebefore} alt="" onClick={() => handlelike(_id, index)} />
-                                                }
-                                            </span>
-                                            <span></span>
-                                            <span className="home_post_save">
-
-                                                {
-                                                    mydata?.Savepost?.includes(_id) ?
-                                                        <img onClick={() => Unsavethispost(_id)} src={save} alt="" />
-                                                        :
-                                                        <img onClick={() => Savethispost(_id)} src={unsave} alt="" />
-                                                }
-                                            </span>
-                                        </div>
-                                        <div className="home_post_stats">
-                                            <span onClick={() => navigate(`/post/${_id}`)}>{like?.length} Likes</span>
-                                            <span onClick={() => navigate(`/post/${_id}`)}> {comments?.length} Comment</span>
-
+                                    <div>
+                                        <div className="home_single_post_username" onClick={() => userId.username === mydata.username ? navigate('/profile') : navigate(`/${userId.username}`)}>
+                                            <div className="home_single_post_username_image">
+                                                <img src={userId?.Pimage} alt="" />
+                                            </div>
+                                            <div > {userId?.username}</div>
 
                                         </div>
-                                    </div>
-                                    <div className='home_post_caption'>
-                                        <span style={{ fontWeight: "bold", cursor: "pointer" }} onClick={() => userId.username === mydata.username ? navigate('/profile') : navigate(`/${userId.username}`)}> {userId.username} </span>
-                                        {caption}
-                                    </div>
 
+                                        <div className="home_single_post_image">
+                                            <img onClick={() => navigate(`/post/${_id}`)} src={url} alt="" />
+                                        </div>
+
+                                        <div className="home_post_likes">
+                                            <div className="home_post_likes_section">
+                                                <span>
+                                                    {isLiked
+                                                        ? <img src={likeafter} alt="" onClick={() => handleunlike(_id, index)} />
+                                                        : <img src={likebefore} alt="" onClick={() => handlelike(_id, index)} />
+                                                    }
+                                                </span>
+                                                <span></span>
+                                                <span className="home_post_save">
+
+                                                    {
+                                                        mydata?.Savepost?.includes(_id) ?
+                                                            <img onClick={() => Unsavethispost(_id)} src={save} alt="" />
+                                                            :
+                                                            <img onClick={() => Savethispost(_id)} src={unsave} alt="" />
+                                                    }
+                                                </span>
+                                            </div>
+                                            <div className="home_post_stats">
+                                                <span onClick={() => navigate(`/post/${_id}`)}>{like?.length} Likes</span>
+                                                <span onClick={() => navigate(`/post/${_id}`)}> {comments?.length} Comment</span>
+
+
+                                            </div>
+                                        </div>
+                                        <div className='home_post_caption'>
+                                            <span style={{ fontWeight: "bold", cursor: "pointer" }} onClick={() => userId.username === mydata.username ? navigate('/profile') : navigate(`/${userId.username}`)}> {userId.username} </span>
+                                            {caption}
+                                        </div>
+                                    </div>
                                 </div>
-                                            }
-                                            </>
+
                             )
                         })
                     }
+
                 </div>
+
                 <div className="right_home">
                     <div>Creator</div>
                     <a href="https://www.linkedin.com/in/himanshu-jain-452270237/" target="_blank" rel="noopener noreferrer">
