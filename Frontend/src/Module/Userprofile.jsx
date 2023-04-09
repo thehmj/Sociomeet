@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import cross from '../images/close.png'
+import BounceLoader from 'react-spinners/BounceLoader';
 
 const Userprofile = () => {
   const forward = "https://sociomeetbackend.onrender.com";
@@ -17,9 +18,12 @@ const Userprofile = () => {
   const [following, setFollowing] = useState([])
   const [showfollower, SetShowfollower] = useState(false)
   const [showfollowing, SetShowfollowing] = useState(false)
+  const [loading, SetLoading] = useState(false);
+
 
   useEffect(() => {
     const getposts = async () => {
+      SetLoading(true);
       const response = await fetch(`${forward}/api/user?username=${username}`, {
         method: "GET",
         headers: {
@@ -27,6 +31,7 @@ const Userprofile = () => {
           Authorization: `Bearer ${localStorage.getItem('user:token')}`
         }
       })
+      SetLoading(false);
       const { posts, UserDetails, isFollowed, following, follower } = await response.json();
 
       setPosts(posts);
@@ -41,6 +46,7 @@ const Userprofile = () => {
   }, [username])
 
   const handlefollow = async () => {
+    SetLoading(true);
     const response = await fetch(`${forward}/api/follow`, {
       method: "POST",
       headers: {
@@ -51,12 +57,14 @@ const Userprofile = () => {
         id: userinfo.id
       })
     })
+    SetLoading(false);
     const res = await response.json();
     setFollow(res?.isFollowed);
   }
 
 
   const handleUnfollow = async () => {
+    SetLoading(true);
     const response = await fetch(`${forward}/api/unfollow`, {
       method: "DELETE",
       headers: {
@@ -67,7 +75,7 @@ const Userprofile = () => {
         followid: userinfo.id
       })
     })
-
+    SetLoading(false);
     const res = await response.json();
     setFollow(res?.isFollowed);
 
@@ -88,7 +96,10 @@ const Userprofile = () => {
       <div className='profile'>
 
         <div className='profile-data'>
-
+          {
+            loading ?
+            <BounceLoader/>:
+          
           <div className='profile-data_up'>
             <div className='profile_image'>
               <img src={userinfo?.Pimage} alt='' />
@@ -181,7 +192,7 @@ const Userprofile = () => {
               <button className='profile_follow_button' onClick={() => handleUnfollow()}>Unfollow</button>
             }
           </div>
-
+}
           <div className='profile_posts'>
             {posts?.length > 0 && posts?.map(({ _id, caption = '', url = '', like = [] }) => {
 

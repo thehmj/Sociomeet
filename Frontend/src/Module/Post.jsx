@@ -8,19 +8,21 @@ import cross from '../images/close.png'
 import save from '../images/bookmark.png'
 import unsave from '../images/save.png'
 import dustbin from '../images/delete.png';
+import BounceLoader from 'react-spinners/BounceLoader';
 
 
 const Post = () => {
-      const forward = "https://sociomeetbackend.onrender.com";
+    const forward = "https://sociomeetbackend.onrender.com";
     const [thispost, SetThispost] = useState();
     const { post_id } = useParams();
     const [mycomment, SetMycomment] = useState();
     const [mydata, setMydata] = useState();
     const [showlikes, SetShowlikes] = useState(false);
+    const [loading, SetLoading] = useState(false);
 
     const navigate = useNavigate();
     useEffect(() => {
-
+        SetLoading(true);
         const getthispost = async () => {
             const response = await fetch(`${forward}/api/post/?post_id=${post_id}`, {
                 method: 'GET',
@@ -30,20 +32,21 @@ const Post = () => {
                 }
 
             })
+            SetLoading(false);
             const { postdetails, user } = await response.json();
             SetThispost(postdetails);
             setMydata(user);
-            
+
         }
         getthispost();
         //eslint-disable-next-line react-hooks/exhaustive-deps
-    },[])
+    }, [])
 
 
     const postmycomment = async (e) => {
 
         e.preventDefault();
-
+        SetLoading(true);
         const response = await fetch(`${forward}/api/postcomment`, {
             method: 'POST',
             headers: {
@@ -56,7 +59,7 @@ const Post = () => {
 
             })
         })
-
+          SetLoading(false);
         const postedcomment = await response.json();
         console.log(postedcomment);
         SetThispost(postedcomment?.postedcomment);
@@ -65,6 +68,7 @@ const Post = () => {
 
 
     const handlelike = async (_id) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/like`, {
             method: "POST",
             headers: {
@@ -74,12 +78,13 @@ const Post = () => {
             body: JSON.stringify({ postid: _id })
 
         })
-
+    SetLoading(false);
         const { postliked } = await response.json();
         SetThispost(postliked);
 
     }
     const handleunlike = async (_id) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/unlike`, {
             method: "DELETE",
             headers: {
@@ -89,11 +94,13 @@ const Post = () => {
             body: JSON.stringify({ postid: _id })
 
         })
+        SetLoading(false);
         const { postliked } = await response.json();
         SetThispost(postliked);
 
     }
     const deleteposts = async (postid) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/deletepost`, {
             method: "Delete",
             headers: {
@@ -104,14 +111,17 @@ const Post = () => {
                 postid: postid
             })
         })
-        if(response.status===200){
-        navigate('/');}
-        else{
+        SetLoading(false);
+        if (response.status === 200) {
+            navigate('/');
+        }
+        else {
             alert('error')
         }
     }
 
     const Savethispost = async (_id) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/savethispost`, {
             method: 'POST',
             headers: {
@@ -121,11 +131,14 @@ const Post = () => {
             body: JSON.stringify({ postid: _id })
 
         })
+        SetLoading(false);
         const { userpostsaved } = await response.json();
         setMydata(userpostsaved);
     }
 
     const Unsavethispost = async (_id) => {
+
+        SetLoading(true);
         const response = await fetch(`${forward}/api/unsavethispost`, {
             method: 'POST',
             headers: {
@@ -135,6 +148,7 @@ const Post = () => {
             body: JSON.stringify({ postid: _id })
 
         })
+        SetLoading(false);
         const { userpostunsaved } = await response.json();
         setMydata(userpostunsaved);
     }
@@ -155,7 +169,9 @@ const Post = () => {
                     </div>
 
                     <div className="single_post_image">
-                        <img src={thispost?.url} alt="" />
+                        {loading ? <BounceLoader /> :
+                            <img src={thispost?.url} alt="" />
+                        }
                     </div>
 
                     <div className="post_likes">
@@ -193,10 +209,10 @@ const Post = () => {
                             showlikes ?
                                 <div className='showlikes'>
                                     <div className='showlikesbox'>
-                                        <div className='showlikesboxtop'> 
-                                        <h2>
-                                            Likes
-                                        </h2>
+                                        <div className='showlikesboxtop'>
+                                            <h2>
+                                                Likes
+                                            </h2>
                                             <img onClick={() => SetShowlikes(false)} src={cross} alt="" />
                                         </div>
                                         <div className='showlikesboxbottom'>
@@ -204,12 +220,12 @@ const Post = () => {
                                                 thispost?.like?.map((like) => {
                                                     return (
                                                         <div className='likediv'>
-                                                            <img onClick={()=>like._id === mydata?._id ? navigate('/profile'): navigate(`/${like?.username}`) } src={like?.Pimage} alt="" />
-                                                            <span  onClick={()=>like._id === mydata?._id ? navigate('/profile'): navigate(`/${like?.username}`) } >
+                                                            <img onClick={() => like._id === mydata?._id ? navigate('/profile') : navigate(`/${like?.username}`)} src={like?.Pimage} alt="" />
+                                                            <span onClick={() => like._id === mydata?._id ? navigate('/profile') : navigate(`/${like?.username}`)} >
 
-                                                            {
-                                                                like?.username
-                                                            }
+                                                                {
+                                                                    like?.username
+                                                                }
                                                             </span>
                                                         </div>
                                                     )

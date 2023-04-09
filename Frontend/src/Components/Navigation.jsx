@@ -13,7 +13,6 @@ const Nav = ()=>{
     const navigate = useNavigate();
    
 
-
     const logout =()=>{
         localStorage.removeItem('user:token');
         return navigate('/login');

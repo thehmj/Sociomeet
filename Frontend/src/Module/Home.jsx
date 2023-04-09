@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import '../Styles/Home.css'
 import Nav from "../Components/Navigation";
 import { useEffect, useState } from 'react';
-// import BounceLoader from 'react-spinners/BounceLoader';
+import BounceLoader from 'react-spinners/BounceLoader';
 import likebefore from '../images/love.png'
 import likeafter from '../images/heart.png'
 import save from '../images/bookmark.png'
@@ -17,10 +17,12 @@ function Home() {
     const [mydata, setMydata] = useState([]);
     const [search, SetSearch] = useState();
     const [searchresult, SetSearchresult] = useState([]);
+    const [loading, SetLoading] = useState(false);
 
 
     useEffect(() => {
         const homeposts = async () => {
+            SetLoading(true);
             const response = await fetch(`${forward}/api/homeposts`, {
                 method: "GET",
                 headers: {
@@ -28,6 +30,7 @@ function Home() {
                     Authorization: `Bearer ${localStorage.getItem('user:token')}`
                 }
             })
+            SetLoading(false);
             const { posts, user } = await response.json();
             const [myuser] = user;
             setMydata(myuser);
@@ -37,6 +40,7 @@ function Home() {
     }, [])
 
     const handlelike = async (_id, index) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/like`, {
             method: "POST",
             headers: {
@@ -46,7 +50,7 @@ function Home() {
             body: JSON.stringify({ postid: _id })
 
         })
-
+       SetLoading(false);
         const { postliked } = await response.json();
         const changedlike = posts?.map((post, i) => {
             if (i === index) return postliked
@@ -56,6 +60,7 @@ function Home() {
 
     }
     const Savethispost = async (_id) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/savethispost`, {
             method: 'POST',
             headers: {
@@ -65,11 +70,13 @@ function Home() {
             body: JSON.stringify({ postid: _id })
 
         })
+        SetLoading(false);
         const { userpostsaved } = await response.json();
         setMydata(userpostsaved);
     }
 
     const Unsavethispost = async (_id) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/unsavethispost`, {
             method: 'POST',
             headers: {
@@ -79,11 +86,13 @@ function Home() {
             body: JSON.stringify({ postid: _id })
 
         })
+        SetLoading(false);
         const { userpostunsaved } = await response.json();
         setMydata(userpostunsaved);
     }
 
     const handleunlike = async (_id, index) => {
+        SetLoading(true);
         const response = await fetch(`${forward}/api/unlike`, {
             method: "DELETE",
             headers: {
@@ -93,6 +102,8 @@ function Home() {
             body: JSON.stringify({ postid: _id })
 
         })
+
+        SetLoading(false);
         const { postliked } = await response.json();
         const changedlike = posts?.map((post, i) => {
             if (i === index) return postliked
@@ -106,6 +117,7 @@ function Home() {
         SetSearch(e.target.value);
         console.log(e.target.value);
         const Usearch = e.target.value;
+        SetLoading(true);
         const response = await fetch(`${forward}/api/search`, {
             method: 'POST',
             headers: {
@@ -116,6 +128,7 @@ function Home() {
                 search: Usearch
             })
         })
+        SetLoading(false);
         const { searchresult } = await response.json();
         SetSearchresult(searchresult);
 
@@ -187,6 +200,10 @@ function Home() {
                             const isLiked = like ? like.some((obj) => (obj._id === mydata._id)) : false;
 
                             return (
+                                <>
+                                 { loading ? 
+                                    <BounceLoader/>
+                                     :
                                 <div className='home_single_post'>
                                     <div className="home_single_post_username" onClick={() => userId.username === mydata.username ? navigate('/profile') : navigate(`/${userId.username}`)}>
                                         <div className="home_single_post_username_image">
@@ -232,6 +249,8 @@ function Home() {
                                     </div>
 
                                 </div>
+                                            }
+                                            </>
                             )
                         })
                     }
