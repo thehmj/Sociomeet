@@ -1,10 +1,12 @@
 import { useNavigate } from "react-router-dom";
 import BounceLoader from 'react-spinners/BounceLoader';
 import { useState } from "react";
-function Signup({ data, setData }) {
+function Signup({ data, setData ,setChecked }) {
+
   const forward = "https://sociomeetbackend.onrender.com"
  const navigate = useNavigate();
  const [loading, SetLoading] = useState(false);
+
  
   const handleSubmit = async (e) => {
 
@@ -23,11 +25,14 @@ function Signup({ data, setData }) {
 
     if (res.status===200) {
       console.log(res, 'res');
+      setData({...data,Name:''});
+      setData({...data,username:''});
+      setChecked(false);
       alert('signup successfull')
       navigate('/login');
     }
      else if(res.status===401){
-      alert('Already exist')
+      alert('User Already Exist')
      }
      else{
       alert('server error');

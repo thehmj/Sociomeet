@@ -38,8 +38,8 @@ function Auth() {
   </label></div>
         <h1 style={{color:"white"}}> {checked=== false ? "LOGIN":"REGISTER"}</h1>
   
-            {checked=== false ? <Signin data={data} setData={setData} checked /> : <Signup  data={data} setData={setData}  />}
-            <a href = "mailto:royalhmj@gmail.com?subject = Feedback&body = Message">
+            {checked=== false ? <Signin data={data} setData={setData} /> : <Signup  data={data} setData={setData} setChecked={setChecked}  />}
+            <a href = "mailto:royalhmj@gmail.com?subject = Feedback" >
 Send Feedback
 </a>
     </div>
