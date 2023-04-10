@@ -22,7 +22,7 @@ https://sociomeet2.netlify.app/login
 - Change password
 - Change/Add bio
 - Change Name
-## Deployment
+## How to Run
 #### Add .env file at Backend which contains Database connection key.
 #### You need some packages at Backend
 
