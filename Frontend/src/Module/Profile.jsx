@@ -197,6 +197,9 @@ const Profile = () => {
                 return (
 
                   <div onClick={() => navigate(`/post/${_id}`)} className='profile_single_post' >
+
+
+
                     <img src={url} alt="" />
 
                     <div className='profile_single_post_stats' >

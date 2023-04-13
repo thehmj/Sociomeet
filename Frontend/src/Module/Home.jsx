@@ -154,8 +154,6 @@ function Home() {
                         <div className='nav_search'>
                             <input type="text" placeholder='Search' value={search} onChange={(e) => searching(e)} />
                         </div>
-                    </div>
-
                     <div>
                         {
                             search ?
@@ -191,6 +189,8 @@ function Home() {
                                 : <div></div>
                         }
                     </div>
+                    </div>
+
                     {loading ?
                         <div className="Bounceloader">
                             <BounceLoader />

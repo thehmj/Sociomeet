@@ -1,18 +1,19 @@
 .signin,.signup{
     background-color: rgb(131, 162, 131);
-    height: 100vh;
+    min-height: 100vh;
+      /* border: 2px solid white; */
+
     }
     .signin_title{
       text-align: center;
-     font-size: 5rem;
+     font-size: 12vh;
+         /* font-weight: bolder; */
      color: white;
      padding-top: 3rem;
      padding-bottom: 3rem;
      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     }
     .login{
-      /* text-align: center; */
-      /* background-color: black; */
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -22,6 +23,10 @@
     .change_page{
       display: flex;
       padding: 20px;
+    }
+    .change_page h3{
+    color: white;
+    font-size: large;
     }
     .switch {
       position: relative;
@@ -92,10 +97,12 @@
       }
     }
     
+  
     .signin_form{
   display: flex;
   flex-direction: column;
   align-items: center;
+
     }
     .input{
       margin:8px ;
@@ -121,6 +128,9 @@
       padding: 10px;
       margin: 15px;
            
+    }
+    .feedback{
+      margin-bottom: 1vh;
     }
     
     

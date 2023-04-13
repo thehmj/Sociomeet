@@ -24,7 +24,7 @@ function Auth() {
     <div className="signin">
     <div className='signin_title'>Sociomeet</div>
         <div className="login">
-       <div className='change_page'> <h3 style={{color:"white"}}> {checked=== true ? "Slide to LOGIN":" Slide to REGISTER"}</h3>
+       <div className='change_page'> <h3> {checked=== true ? "Slide to LOGIN":" Slide to REGISTER"}</h3>
         
         <label class="switch">   
           <input
@@ -39,7 +39,7 @@ function Auth() {
         <h1 style={{color:"white"}}> {checked=== false ? "LOGIN":"REGISTER"}</h1>
   
             {checked=== false ? <Signin data={data} setData={setData} /> : <Signup  data={data} setData={setData} setChecked={setChecked}  />}
-            <a href = "mailto:royalhmj@gmail.com?subject = Feedback" >
+            <a className="feedback" href = "mailto:royalhmj@gmail.com?subject = Feedback" >
 Send Feedback
 </a>
     </div>

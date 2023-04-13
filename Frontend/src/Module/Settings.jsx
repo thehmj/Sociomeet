@@ -128,7 +128,12 @@ const Setting = () => {
                         </div>
 
                     </div>
+                    
+                    
                 </div>
+                    <footer className='setting_footer'>
+                        <a href="http://github.com/thehmj" target="_blank" rel="noopener noreferrer">&copy;thehmj</a>
+                    </footer>
             </div>
         </>
     )

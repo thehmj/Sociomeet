@@ -265,6 +265,11 @@ const Post = () => {
 
                 <div className='post_stats'>
 
+                    
+                    <form className='post_stats_add' onSubmit={(e) => postmycomment(e)} >
+                        <textarea placeholder='Post a comment...' value={mycomment} onChange={(e) => SetMycomment(e.target.value)} required />
+                        <button type="submit">Post Comment</button>
+                    </form>
                     <div className='post_stats_comments'>
                         <h2 style={{ textAlign: 'center', margin: '2px', borderBottom: '1px solid' }}>Comments</h2>
                         {
@@ -276,10 +281,12 @@ const Post = () => {
                                             <div className='post_stats_comments_all_img'>
                                                 <img src={commentor.Pimage} alt="" />
                                             </div>
-                                            <div>{commentor.username} : </div>
+                                            <div>
+                                            <div className='comment_username'>{commentor.username}</div>
 
                                             <div>
                                                 {comment}
+                                            </div>
                                             </div>
 
                                         </span>
@@ -290,10 +297,6 @@ const Post = () => {
                         }
 
                     </div>
-                    <form className='post_stats_add' onSubmit={(e) => postmycomment(e)} >
-                        <textarea placeholder='Post a comment...' value={mycomment} onChange={(e) => SetMycomment(e.target.value)} required />
-                        <button type="submit">Post Comment</button>
-                    </form>
                 </div>
             </div>
 
