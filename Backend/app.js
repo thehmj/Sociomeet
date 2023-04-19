@@ -82,7 +82,7 @@ app.post('/api/login', async (req, res, next) => {
                 jwt.sign(
                     payload,
                     JWT_SECRET_KEY,
-                    { expiresIn: 84600 },
+                    { expiresIn: 864000 },
                     (err, token) => {
                         if (err) { res.json({ message: err }) }
                         else {

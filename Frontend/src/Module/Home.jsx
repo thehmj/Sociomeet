@@ -31,12 +31,18 @@ function Home() {
                 }
             })
             SetLoading(false);
+            if (response.status===440) {
+                alert('session expired');
+                localStorage.removeItem('user:token');
+                return navigate('/login');
+            }
             const { posts, user } = await response.json();
             const [myuser] = user;
             setMydata(myuser);
             setPosts(posts);
         }
         homeposts()
+         //eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handlelike = async (_id, index) => {

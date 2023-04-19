@@ -40,12 +40,19 @@ const Profile = () => {
         setFollower(follower);
         setFollowing(following);
       }
+      else if(response.status===440){
+          alert('session expired');
+          localStorage.removeItem('user:token');
+          return navigate('/login');
+      
+      }
       else {
         alert('server error');
       }
 
     }
     getposts()
+     //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
 
@@ -80,7 +87,7 @@ const Profile = () => {
               {userinfo?.bio}
             </div>
             <div className='profile-data_up_stats'>
-              <div className='profile_post_btn' onClick={() => SetShowpostonly(true)}>
+              <div className='profile_post_btn'style={showpostsonly ? { color : "red"}:{ color : "black"} } onClick={() => SetShowpostonly(true)}>
                 {posts.length} Posts
               </div>
               <div className='profile_followers'>
@@ -158,7 +165,7 @@ const Profile = () => {
                 }
               </div>
 
-              <div className='profile_savepost_btn' onClick={() => SetShowpostonly(false)}>Save Posts</div>
+              <div className='profile_savepost_btn'style={showpostsonly ? { color : "black"}:{ color : "red"} } onClick={() => SetShowpostonly(false)}>Save Posts</div>
 
             </div>
           </div>

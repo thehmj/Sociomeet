@@ -32,6 +32,11 @@ const Userprofile = () => {
         }
       })
       SetLoading(false);
+      if (response.status===440) {
+        alert('session expired');
+        localStorage.removeItem('user:token');
+        return navigate('/login');
+    }
       const { posts, UserDetails, isFollowed, following, follower } = await response.json();
 
       setPosts(posts);
@@ -43,6 +48,7 @@ const Userprofile = () => {
 
     }
     getposts()
+  //eslint-disable-next-line react-hooks/exhaustive-deps
   }, [username])
 
   const handlefollow = async () => {

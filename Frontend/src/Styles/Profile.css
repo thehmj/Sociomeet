@@ -1,7 +1,7 @@
 .profile{
     display: flex;
     justify-content: center;
-    background-color: rgb(164, 158, 150);
+    /* background-color: rgb(164, 158, 150); */
 }
 .profile-data{
    min-height: 100vh;
@@ -93,6 +93,7 @@ overflow-y: scroll;
 font-size: 12px;
 border-radius: 2rem;
 padding: 0;
+z-index: 2;
 }
 .show_followers_content_top{
     display: grid;

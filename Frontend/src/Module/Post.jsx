@@ -33,6 +33,11 @@ const Post = () => {
 
             })
             SetLoading(false);
+            if (response.status===440) {
+                alert('session expired');
+                localStorage.removeItem('user:token');
+                return navigate('/login');
+            }
             const { postdetails, user } = await response.json();
             SetThispost(postdetails);
             setMydata(user);
