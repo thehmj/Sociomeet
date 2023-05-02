@@ -272,7 +272,7 @@ function Home() {
 
                 </div>
 
-                <div className="right_home">
+                {/* <div className="right_home">
                     <div>Creator</div>
                     <a href="https://www.linkedin.com/in/himanshu-jain-452270237/" target="_blank" rel="noopener noreferrer">
                         <div className="right_home_creator">
@@ -292,7 +292,7 @@ function Home() {
 
 
                     <div></div>
-                </div>
+                </div> */}
             </div>
         </div>
     )
