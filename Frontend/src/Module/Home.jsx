@@ -65,6 +65,7 @@ function Home() {
         setPosts(changedlike);
 
     }
+    
     const Savethispost = async (_id) => {
         SetLoading(true);
         const response = await fetch(`${forward}/api/savethispost`, {
