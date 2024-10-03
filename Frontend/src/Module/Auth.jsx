@@ -42,11 +42,6 @@ function Auth() {
         <a className="feedback" href="mailto:royalhmj@gmail.com?subject = Feedback" >
           Send Feedback
         </a>
-        {/* <a className="feedback" href="intent://open?#Intent;action=com.okiedokiepay.action.OPEN_VIEW;package=com.okiedokiepay;end" _blank > */}
-        <a className="feedback" href="okiedokiepay://success" _blank >
-       
-          Open App
-        </a>
       </div>
     </div>
   )
